@@ -3,7 +3,7 @@
 document.getElementById("form").addEventListener("submit", function (event) {
     event.preventDefault(); // Previene il comportamento predefinito del modulo
 
-    const inputChilometri = parseFloat(document.getElementById("chilometri").value);
+    const inputChilometri = Number(document.getElementById("chilometri").value);
     const inputEta = parseInt(document.getElementById("etaPasseggero").value);
     const prezzoFinale = document.getElementById("prezzoFinale");
 
