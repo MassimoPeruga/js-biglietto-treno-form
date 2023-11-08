@@ -7,6 +7,15 @@ document.getElementById("form").addEventListener("submit", function (event) {
     const inputEta = parseInt(document.getElementById("etaPasseggero").value);
     const prezzoFinale = document.getElementById("prezzoFinale");
 
+    const inputNome = document.getElementById("inputNome").value;
+    const inputCognome = document.getElementById("inputCognome").value;
+    const infoUtente = document.getElementById("infoUtente");
+    const carrozza = document.getElementById("carrozza");
+    const codice = document.getElementById("codice");
+    let offerta = document.getElementById("offerta");
+
+    let visible = document.getElementById("visible");
+
     if (!isNaN(inputChilometri) && !isNaN(inputEta)) {
         const prezzoKm = 0.21;
         let prezzoBiglietto = prezzoKm * inputChilometri;
@@ -20,18 +29,42 @@ document.getElementById("form").addEventListener("submit", function (event) {
 
         if (inputEta < 18) {
             scontoBiglietto = (prezzoBiglietto / 100) * percentualeScontoMinorenni;
+            offerta.textContent = "Silver";
         } else if (inputEta >= 65) {
             scontoBiglietto = (prezzoBiglietto / 100) * percentualeScontoOver65;
+            offerta.textContent = "Gold";
+        }
+        else {
+            offerta.textContent = "Standard";
         }
 
         prezzoBiglietto -= scontoBiglietto;
-        prezzoFinale.textContent = "Prezzo del biglietto: " + prezzoBiglietto.toFixed(2) + " euro";
+        prezzoFinale.textContent = prezzoBiglietto.toFixed(2) + "€";
+
+        // Mostra nome e cognome inseriti
+        infoUtente.textContent = `${inputNome} ${inputCognome}`;
+
+        // Genera un numero casuale da 1 a 20
+        const numeroCasuale1a20 = Math.floor(Math.random() * 20) + 1;
+        carrozza.textContent = numeroCasuale1a20;
+
+        // Genera un numero casuale di sei cifre
+        const numeroCasuale6Cifre = Math.floor(100000 + Math.random() * 900000);
+        codice.textContent = numeroCasuale6Cifre;
+
+        visible.className = ("col-12 col-lg-7 p-3 my-auto");
     } else {
-        alert("Non hai inserito un numero.");
+        alert("Non hai inserito un numero valido.");
     }
 });
 
-// Quando viene fatto clic sul pulsante di reset, reimposta il contenuto del paragrafo prezzoFinale
+// Quando viene fatto clic sul pulsante di reset, reimposta il contenuto del paragrafo
 document.getElementById("form").addEventListener("reset", function () {
-    document.getElementById("prezzoFinale").textContent = "Prezzo del biglietto: ";
+    visible.classList.add("d-none");
+
+    document.getElementById("prezzoFinale").textContent = "";
+    offerta.textContent = "";
+    infoUtente.textContent = "";
+    carrozza.textContent = "";
+    codice.textContent = "";
 });
