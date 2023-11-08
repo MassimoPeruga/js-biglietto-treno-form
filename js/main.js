@@ -16,7 +16,7 @@ document.getElementById("form").addEventListener("submit", function (event) {
 
     let visible = document.getElementById("visible");
 
-    if (!isNaN(inputChilometri) && !isNaN(inputEta)) {
+    if ((!isNaN(inputChilometri) && !isNaN(inputEta)) && ((inputChilometri > 0) && (inputEta >= 0 && inputEta <= 100))) {
         const prezzoKm = 0.21;
         let prezzoBiglietto = prezzoKm * inputChilometri;
         let scontoBiglietto = 0;
